@@ -22,10 +22,11 @@
 </head>
 <body>
   <h2>เลือกบัญชีเพื่อโอนเงิน</h2>
+  
   <!-- QR Code -->
   <div class="qr-container">
 
-    //------------QR1-------------
+
 <div class="qr-box">
   <img src="images/QR1.jpg" alt="QR1">
   <br>
@@ -34,7 +35,6 @@
 
 
 
-    //------------QR2-------------
 <div class="qr-box">
   <img src="images/QR2.jpg" alt="QR2">
   <br>
@@ -78,23 +78,22 @@ window.onload = function() {
 
 
 
-function closeWindow() {
-  if (window.liff && liff.isInClient()) {
-    // ปิดหน้าต่าง LIFF
-    liff.closeWindow();
-  } else {
-    // พยายามปิดหน้าต่าง browser
-    window.close();
-    // ถ้าไม่ปิด ให้แจ้งผู้ใช้
-    setTimeout(() => {
-      alert("ปิดแท็บมุมบนขวา");
-    }, 100);
-  }
-}
+    function closeWindow() {
+      if (window.liff && liff.isInClient()) {
+        liff.closeWindow();
+      } else {
+        alert("ปิดหน้าต่างได้เฉพาะใน LIFF app");
+      }
+    }
 
-  function openQR(url) {
-    window.open(url, "_blank");
-  }
+    function openQR(url) {
+      if (window.liff && liff.isInClient()) {
+        // เปิดในเบราว์เซอร์มือถือจาก LIFF
+        liff.openWindow({ url, external: true });
+      } else {
+        window.open(url, "_blank");
+      }
+    }
 
     
   </script>
