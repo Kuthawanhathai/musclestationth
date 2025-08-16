@@ -24,14 +24,23 @@
   <h2>เลือกบัญชีเพื่อโอนเงิน</h2>
   <!-- QR Code -->
   <div class="qr-container">
-    <div class="qr-box">
-      <img src="images/QR1.jpg" alt="QR1">
-      <button onclick="downloadQR('images/QR1.jpg','QR1.jpg')">Save a QR Code</button>
-    </div>
-    <div class="qr-box">
-      <img src="images/QR2.jpg" alt="QR2">
-      <button onclick="downloadQR('images/QR2.jpg','QR2.jpg')">Save a QR Code</button>
-    </div>
+    
+<div class="qr-box">
+  <img src="images/QR1.jpg" alt="QR1">
+  <br>
+  <a href="images/QR1.jpg" download="QR1.jpg">
+    <button>Save a QR Code</button>
+  </a>
+</div>
+    
+<div class="qr-box">
+  <img src="images/QR2.jpg" alt="QR2">
+  <br>
+  <a href="images/QR2.jpg" download="QR2.jpg">
+    <button>Save a QR Code</button>
+  </a>
+</div>
+    
   </div>
 
   <!-- ปุ่มปิดหน้าต่าง -->
@@ -65,22 +74,7 @@ window.onload = function() {
       });
     }
 
-    function downloadQR(url, filename) {
-      // สร้างลิงก์ดาวน์โหลดแบบชั่วคราว
-      fetch(url)
-        .then(resp => resp.blob())
-        .then(blob => {
-          const blobUrl = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = blobUrl;
-          a.download = filename;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(blobUrl);
-        })
-        .catch(err => console.error(err));
-    }
+
 
 function closeWindow() {
   if (window.liff && liff.isInClient()) {
