@@ -11,12 +11,9 @@
     .bank-info { display: flex; flex-direction: column; }
     button { margin-top: 5px; padding: 6px 12px; border: none; border-radius: 6px; background: #1DB446; color: #fff; cursor: pointer; }
 
-    .qr-row { display: flex; gap: 20px; margin: 20px 0; }
+    .qr-container { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
     .qr-box { display: flex; flex-direction: column; align-items: center; text-align: center; }
     .qr-box img { width: 150px; height: 150px; margin-bottom: 5px; border: 1px solid #ccc; border-radius: 8px; }
-
-    .qr-container { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
-    
 
     .close-btn { width: 100%; margin-top: 30px; background: #FF3B30; }
   </style>
@@ -25,7 +22,7 @@
 </head>
 <body>
   <h2>เลือกบัญชีเพื่อโอนเงิน</h2>
-  
+
   <!-- ธนาคาร -->
   <div class="bank">
     <img src="images/GSB.png" alt="ออมสิน">
@@ -35,11 +32,10 @@
       <button onclick="copyText('020436062291')">Copy เลขบัญชี</button>
     </div>
   </div>
-  
+
   <h3>สแกนหรือบันทึก QR Code</h3>
   <!-- QR Code -->
   <div class="qr-container">
-  <div class="qr-row">
     <div class="qr-box">
       <img src="images/QR1.jpg" alt="QR1">
       <button onclick="downloadQR('images/QR1.jpg','QR1.jpg')">Save a QR Code</button>
@@ -49,20 +45,22 @@
       <button onclick="downloadQR('images/QR2.jpg','QR2.jpg')">Save a QR Code</button>
     </div>
   </div>
-</div>
 
-    <!-- ปุ่มปิดหน้าต่าง -->
+  <!-- ปุ่มปิดหน้าต่าง -->
   <button class="close-btn" onclick="closeWindow()">ปิดหน้าต่าง</button>
 
   <script>
     // เริ่มใช้งาน LIFF
     async function main() {
-      await liff.init({ liffId: "2007887429-Arr5x53g" })
-      console.log("LIFF init success")
+      try {
+        await liff.init({ liffId: "2007887429-Arr5x53g" });
+        console.log("LIFF init success");
+      } catch (err) {
+        console.error("LIFF init failed:", err);
+      }
     }
-    main()
+    main();
 
-    
     function copyText(text) {
       navigator.clipboard.writeText(text).then(() => {
         alert("คัดลอกแล้ว: " + text);
@@ -70,19 +68,27 @@
     }
 
     function downloadQR(url, filename) {
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      // สร้างลิงก์ดาวน์โหลดแบบชั่วคราว
+      fetch(url)
+        .then(resp => resp.blob())
+        .then(blob => {
+          const blobUrl = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(blobUrl);
+        })
+        .catch(err => console.error(err));
     }
 
     function closeWindow() {
-      if (window.liff) {
+      if (window.liff && liff.isInClient()) {
         liff.closeWindow();
       } else {
-        window.close();
+        alert("ปิดหน้าต่างได้เฉพาะใน LIFF app");
       }
     }
   </script>
