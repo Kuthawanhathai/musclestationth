@@ -88,10 +88,9 @@ window.onload = function() {
 
     function openQR(url) {
       if (window.liff && liff.isInClient()) {
-        // เปิดในเบราว์เซอร์มือถือจาก LIFF
-        liff.openWindow({ url, external: true });
+         window.open(url, "_blank");
       } else {
-        window.open(url, "_blank");
+       liff.openWindow({ url, external: true });
       }
     }
 
