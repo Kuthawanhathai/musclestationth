@@ -86,13 +86,9 @@ window.onload = function() {
       }
     }
 
-    function openQR(url) {
-      if (window.liff && liff.isInClient()) {
-         window.open(url, "_blank");
-      } else {
-       liff.openWindow({ url, external: true });
-      }
-    }
+  function openQR(url) {
+    window.open(url, "_blank");
+  }
 
     
   </script>
