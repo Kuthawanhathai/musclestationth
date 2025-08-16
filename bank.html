@@ -55,6 +55,14 @@
   <button class="close-btn" onclick="closeWindow()">ปิดหน้าต่าง</button>
 
   <script>
+    // เริ่มใช้งาน LIFF
+    async function main() {
+      await liff.init({ liffId: "2007887429-Arr5x53g" })
+      console.log("LIFF init success")
+    }
+    main()
+
+    
     function copyText(text) {
       navigator.clipboard.writeText(text).then(() => {
         alert("คัดลอกแล้ว: " + text);
