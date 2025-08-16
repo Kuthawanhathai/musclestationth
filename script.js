@@ -671,6 +671,7 @@ async function checkout() {
     saveCart();
     renderCart();
     showTab(2);
+    liff.closeWindow();
   } catch (err) {
     //console.error(err);
     console.error('sendMessages error:', err);
