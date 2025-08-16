@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>เลือกบัญชีโอนเงิน</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    .bank { margin: 15px 0; padding: 10px; border: 1px solid #ccc; border-radius: 8px; }
+    body { font-family: sans-serif; padding: 20px; text-align: center; }
+    .bank { margin: 15px 0; padding: 10px; border: 1px solid #ccc; border-radius: 8px; text-align: left; }
     button { margin-top: 5px; padding: 6px 12px; border: none; border-radius: 6px; background: #1DB446; color: #fff; cursor: pointer; }
+    .qr-container { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
+    .qr-box { text-align: center; }
+    .qr-box img { width: 150px; height: 150px; border: 1px solid #ccc; border-radius: 8px; }
+    .close-btn { margin-top: 30px; background: #ff4444; }
   </style>
 </head>
 <body>
@@ -31,11 +35,39 @@
     <button onclick="copyText('111-2-33333-4')">Copy เลขบัญชี</button>
   </div>
 
+  <h3>สแกนหรือบันทึก QR Code</h3>
+  <div class="qr-container">
+    <div class="qr-box">
+      <img src="https://via.placeholder.com/150?text=QR1" alt="QR1">
+      <br>
+      <a href="https://via.placeholder.com/500?text=QR1" download="QR1.png">
+        <button>Save a QR Code</button>
+      </a>
+    </div>
+    <div class="qr-box">
+      <img src="https://via.placeholder.com/150?text=QR2" alt="QR2">
+      <br>
+      <a href="https://via.placeholder.com/500?text=QR2" download="QR2.png">
+        <button>Save a QR Code</button>
+      </a>
+    </div>
+  </div>
+
+  <button class="close-btn" onclick="closeWindow()">ปิดหน้าต่าง</button>
+
   <script>
     function copyText(text) {
       navigator.clipboard.writeText(text).then(() => {
         alert("คัดลอกแล้ว: " + text);
       });
+    }
+
+    function closeWindow() {
+      if (window.liff) {
+        liff.closeWindow();
+      } else {
+        window.close();
+      }
     }
   </script>
 </body>
