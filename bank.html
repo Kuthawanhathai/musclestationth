@@ -24,22 +24,24 @@
   <h2>เลือกบัญชีเพื่อโอนเงิน</h2>
   <!-- QR Code -->
   <div class="qr-container">
-    
+
+    //------------QR1-------------
 <div class="qr-box">
   <img src="images/QR1.jpg" alt="QR1">
   <br>
-  <a href="images/QR1.jpg" download="QR1.jpg">
-    <button>Save a QR Code</button>
-  </a>
+  <button onclick="openQR('images/QR1.jpg')">Save a QR Code</button>
 </div>
-    
+
+
+
+    //------------QR2-------------
 <div class="qr-box">
   <img src="images/QR2.jpg" alt="QR2">
   <br>
-  <a href="images/QR2.jpg" download="QR2.jpg">
-    <button>Save a QR Code</button>
-  </a>
+  <button onclick="openQR('images/QR2.jpg')">Save a QR Code</button>
 </div>
+
+
     
   </div>
 
@@ -89,6 +91,12 @@ function closeWindow() {
     }, 100);
   }
 }
+
+  function openQR(url) {
+    window.open(url, "_blank");
+  }
+
+    
   </script>
 </body>
 </html>
