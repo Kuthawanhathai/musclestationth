@@ -654,7 +654,7 @@ async function checkout() {
             action: {
               type: "uri",
               label: "ชำระเงิน",
-              uri: "https://musclestationth.github.io/musclestationth/bank.html" // ใส่ URL หน้า QR Code จริงของคุณ
+              uri: "https://liff.line.me/2007887429-Arr5x53g" // ใส่ URL หน้า QR Code จริงของคุณ
             }
           }
         ]
