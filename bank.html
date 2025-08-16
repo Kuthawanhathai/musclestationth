@@ -9,13 +9,13 @@
     .bank { display: flex; align-items: center; gap: 10px; margin: 15px 0; padding: 10px; border: 1px solid #ccc; border-radius: 8px; }
     .bank img { width: 40px; height: 40px; }
     .bank-info { display: flex; flex-direction: column; }
-    button { margin-top: 5px; padding: 6px 12px; border: none; border-radius: 6px; background: #1DB446; color: #fff; cursor: pointer; }
+    button { margin-top: 5px; padding: 12px 24px; border: none; border-radius: 6px; background: #1DB446; color: #fff; cursor: pointer; font-size: 18px; }
 
     .qr-container { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
     .qr-box { display: flex; flex-direction: column; align-items: center; text-align: center; }
-    .qr-box img { width: 150px; height: 150px; margin-bottom: 5px; border: 1px solid #ccc; border-radius: 8px; }
+    .qr-box img { width: 200px; height: 200px; margin-bottom: 5px; border: 1px solid #ccc; border-radius: 8px; }
 
-    .close-btn { width: 100%; margin-top: 30px; background: #FF3B30; }
+    .close-btn { width: 100%; margin-top: 30px; background: #FF3B30; font-size: 18px; }
   </style>
   <!-- โหลด SDK ของ LIFF -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
@@ -29,7 +29,6 @@
 
 <div class="qr-box">
   <img src="images/QR1.jpg" alt="QR1">
-  <br>
   <button onclick="openQR('images/QR1.jpg')">Save a QR Code</button>
 </div>
 
@@ -37,7 +36,6 @@
 
 <div class="qr-box">
   <img src="images/QR2.jpg" alt="QR2">
-  <br>
   <button onclick="openQR('images/QR2.jpg')">Save a QR Code</button>
 </div>
 
