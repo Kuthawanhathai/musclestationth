@@ -654,7 +654,7 @@ async function checkout() {
             action: {
               type: "uri",
               label: "ชำระเงิน",
-              uri: "https://your-payment-page.com/qr?orderId=12345" // ใส่ URL หน้า QR Code จริงของคุณ
+              uri: "https://kuthawanhathai.github.io/musclestationth/bank.html" // ใส่ URL หน้า QR Code จริงของคุณ
             }
           }
         ]
