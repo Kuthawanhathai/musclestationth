@@ -39,7 +39,7 @@
 
   <script>
     // เริ่มใช้งาน LIFF
-    async function main() {
+   /* async function main() {
       try {
         await liff.init({ liffId: "2007887429-Arr5x53g" });
         console.log("LIFF init success");
@@ -47,8 +47,18 @@
         console.error("LIFF init failed:", err);
       }
     }
-    main();
+    main();*/
 
+
+    
+
+window.onload = function() {
+  liff.init({ liffId: "2007887429-Arr5x53g" }).then(() => {
+
+  });
+};
+
+    
     function copyText(text) {
       navigator.clipboard.writeText(text).then(() => {
         alert("คัดลอกแล้ว: " + text);
@@ -72,9 +82,19 @@
         .catch(err => console.error(err));
     }
 
-    function closeWindow() {
-      window.close();
-    }
+function closeWindow() {
+  if (window.liff && liff.isInClient()) {
+    // ปิดหน้าต่าง LIFF
+    liff.closeWindow();
+  } else {
+    // พยายามปิดหน้าต่าง browser
+    window.close();
+    // ถ้าไม่ปิด ให้แจ้งผู้ใช้
+    setTimeout(() => {
+      alert("ปิดแท็บมุมบนขวา");
+    }, 100);
+  }
+}
   </script>
 </body>
 </html>
