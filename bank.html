@@ -73,11 +73,7 @@
     }
 
     function closeWindow() {
-      if (window.liff && liff.isInClient()) {
-        liff.closeWindow();
-      } else {
-        alert("ปิดหน้าต่างได้เฉพาะใน LIFF app");
-      }
+      window.close();
     }
   </script>
 </body>
