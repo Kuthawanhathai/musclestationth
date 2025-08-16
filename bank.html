@@ -5,69 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>เลือกบัญชีโอนเงิน</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; text-align: center; }
-    .bank { margin: 15px 0; padding: 10px; border: 1px solid #ccc; border-radius: 8px; text-align: left; }
+    body { font-family: sans-serif; padding: 20px; }
+    .bank { display: flex; align-items: center; gap: 10px; margin: 15px 0; padding: 10px; border: 1px solid #ccc; border-radius: 8px; }
+    .bank img { width: 40px; height: 40px; }
+    .bank-info { display: flex; flex-direction: column; }
     button { margin-top: 5px; padding: 6px 12px; border: none; border-radius: 6px; background: #1DB446; color: #fff; cursor: pointer; }
-    .qr-container { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
-    .qr-box { text-align: center; }
-    .qr-box img { width: 150px; height: 150px; border: 1px solid #ccc; border-radius: 8px; }
-    .close-btn { margin-top: 30px; background: #ff4444; }
+
+    .qr-row { display: flex; gap: 20px; margin: 20px 0; }
+    .qr-box { display: flex; flex-direction: column; align-items: center; }
+    .qr-box img { width: 150px; height: 150px; margin-bottom: 5px; }
+
+    .close-btn { width: 100%; margin-top: 30px; background: #FF3B30; }
   </style>
   <!-- โหลด SDK ของ LIFF -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
   <h2>เลือกบัญชีเพื่อโอนเงิน</h2>
-
-<div class="bank" style="display: flex; align-items: center; gap: 10px;">
-  <img src="images/GSB.png" alt="ออมสิน" style="width:40px; height:40px;">
-  <div>
-    <strong>• ออมสิน</strong><br>
-    <span id="gsb">020436062291</span><br>
-    <button onclick="copyText('020436062291')">Copy เลขบัญชี</button>
+  
+  <!-- ธนาคาร -->
+  <div class="bank">
+    <img src="images/GSB.png" alt="ออมสิน">
+    <div class="bank-info">
+      <strong>• ออมสิน</strong>
+      <span id="gsb">020436062291</span>
+      <button onclick="copyText('020436062291')">Copy เลขบัญชี</button>
+    </div>
   </div>
-</div>
-
-
+  
   <h3>สแกนหรือบันทึก QR Code</h3>
-  <div class="qr-container">
-<div class="qr-box">
-  <img src="images/QR1.jpg" alt="QR1">
-  <br>
-  <a href="images/QR1.jpg" download="QR1.jpg">
-    <button>Save a QR Code</button>
-  </a>
-</div>
-<div class="qr-box">
-  <img src="images/QR.jpg" alt="QR2">
-  <br>
-  <a href="images/QR2.jpg" download="QR2.jpg">
-    <button>Save a QR Code</button>
-  </a>
-</div>
+  <!-- QR Code -->
+  <div class="qr-row">
+    <div class="qr-box">
+      <img src="images/QR1.jpg" alt="QR1">
+      <button onclick="downloadQR('images/QR1.jpg','QR1.jpg')">Save a QR Code</button>
+    </div>
+    <div class="qr-box">
+      <img src="images/QR2.jpg" alt="QR2">
+      <button onclick="downloadQR('images/QR2.jpg','QR2.jpg')">Save a QR Code</button>
+    </div>
   </div>
 
+
+    <!-- ปุ่มปิดหน้าต่าง -->
   <button class="close-btn" onclick="closeWindow()">ปิดหน้าต่าง</button>
 
   <script>
-    // เริ่มใช้งาน LIFF
-    async function main() {
-      await liff.init({ liffId: "2007887429-xA1zkzPL" })
-      console.log("LIFF init success")
-    }
-    main()
-
     function copyText(text) {
       navigator.clipboard.writeText(text).then(() => {
         alert("คัดลอกแล้ว: " + text);
       });
     }
 
+    function downloadQR(url, filename) {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
     function closeWindow() {
-      if (liff.isInClient()) {
-        liff.closeWindow(); // ปิดในแอป LINE
+      if (window.liff) {
+        liff.closeWindow();
       } else {
-        window.close(); // ปิดใน browser ปกติ
+        window.close();
       }
     }
   </script>
