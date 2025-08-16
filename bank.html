@@ -13,6 +13,8 @@
     .qr-box img { width: 150px; height: 150px; border: 1px solid #ccc; border-radius: 8px; }
     .close-btn { margin-top: 30px; background: #ff4444; }
   </style>
+  <!-- โหลด SDK ของ LIFF -->
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
   <h2>เลือกบัญชีเพื่อโอนเงิน</h2>
@@ -56,6 +58,13 @@
   <button class="close-btn" onclick="closeWindow()">ปิดหน้าต่าง</button>
 
   <script>
+    // เริ่มใช้งาน LIFF
+    async function main() {
+      await liff.init({ liffId: "2007887429-xA1zkzPL" })
+      console.log("LIFF init success")
+    }
+    main()
+
     function copyText(text) {
       navigator.clipboard.writeText(text).then(() => {
         alert("คัดลอกแล้ว: " + text);
@@ -63,10 +72,10 @@
     }
 
     function closeWindow() {
-      if (window.liff) {
-        liff.closeWindow();
+      if (liff.isInClient()) {
+        liff.closeWindow(); // ปิดในแอป LINE
       } else {
-        window.close();
+        window.close(); // ปิดใน browser ปกติ
       }
     }
   </script>
