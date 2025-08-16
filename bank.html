@@ -12,8 +12,11 @@
     button { margin-top: 5px; padding: 6px 12px; border: none; border-radius: 6px; background: #1DB446; color: #fff; cursor: pointer; }
 
     .qr-row { display: flex; gap: 20px; margin: 20px 0; }
-    .qr-box { display: flex; flex-direction: column; align-items: center; }
-    .qr-box img { width: 150px; height: 150px; margin-bottom: 5px; }
+    .qr-box { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .qr-box img { width: 150px; height: 150px; margin-bottom: 5px; border: 1px solid #ccc; border-radius: 8px; }
+
+    .qr-container { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
+    
 
     .close-btn { width: 100%; margin-top: 30px; background: #FF3B30; }
   </style>
@@ -35,17 +38,18 @@
   
   <h3>สแกนหรือบันทึก QR Code</h3>
   <!-- QR Code -->
+  <div class="qr-container">
   <div class="qr-row">
     <div class="qr-box">
       <img src="images/QR1.jpg" alt="QR1">
       <button onclick="downloadQR('images/QR1.jpg','QR1.jpg')">Save a QR Code</button>
     </div>
     <div class="qr-box">
-      <img src="images/QR1.jpg" alt="QR1">
-      <button onclick="downloadQR('images/QR1.jpg','QR1.jpg')">Save a QR Code</button>
+      <img src="images/QR2.jpg" alt="QR2">
+      <button onclick="downloadQR('images/QR2.jpg','QR2.jpg')">Save a QR Code</button>
     </div>
   </div>
-
+</div>
 
     <!-- ปุ่มปิดหน้าต่าง -->
   <button class="close-btn" onclick="closeWindow()">ปิดหน้าต่าง</button>
